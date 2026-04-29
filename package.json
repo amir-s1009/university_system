@@ -1,0 +1,50 @@
+{
+  "name": "university_system",
+  "version": "1.0.0",
+  "description": "university_system project for my web course",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "npx prisma generate && tsc",
+    "start": "node dist/index.js",
+    "dev": "nodemon index.ts",
+    "render-build": "npm install && npm run build"
+  },
+  "author": "Amirhossein Ranjdoozan",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/multer": "^2.0.0",
+    "@types/node": "^24.0.10",
+    "@types/nodemailer": "^7.0.1",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.8",
+    "nodemon": "^3.1.10",
+    "prisma": "^6.11.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.922.0",
+    "@aws-sdk/lib-storage": "^3.922.0",
+    "@prisma/client": "^6.11.1",
+    "bcrypt": "^6.0.0",
+    "busboy": "^1.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.0.1",
+    "express": "^5.1.0",
+    "jose": "^6.0.12",
+    "melipayamak": "^1.0.5",
+    "multer": "^2.0.2",
+    "nodemailer": "^7.0.6",
+    "pdf-lib": "^1.17.1",
+    "pg": "^8.16.3",
+    "serverless-http": "^4.0.0",
+    "sharp": "^0.34.4",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "zod": "^4.0.17"
+  }
+}

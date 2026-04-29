@@ -1,0 +1,13 @@
+{
+  "app":"yadinow-backend",
+  "disks": [
+    {
+      "name": "my-disk",
+      "mountTo": "prisma/migrations"
+    },
+    {
+      "name": "my-disk",
+      "mountTo": "tmp"
+    }
+  ]
+}

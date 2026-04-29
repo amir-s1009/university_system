@@ -1,0 +1,200 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Day {
+  SATURDAY
+  SUNDAY
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+}
+
+enum TimeRange {
+  f_8_t_10
+  f_10_t_12
+  f_14_t_16
+  f_16_t_18
+}
+
+enum StudentCourseStatus {
+  NOT_FINISHED
+  STUDENT_REMOVED
+  TEACHER_REMOVED_STUDENT
+  SCORED_TEMPRORILY
+  SCORED_PERMENANTLY
+}
+
+enum StudyMode {
+  FULLY_FUNDED
+  TUITION_PAYER
+}
+
+enum LessonType {
+  BASE
+  GENERAL
+  SPECIAL
+  PRACTICAL
+}
+
+model GeneralSettings {
+  id               Int    @id @default(1)
+  activeSemesterId String
+}
+
+model User {
+  id           String   @id @default(uuid())
+  firstName    String
+  lastName     String
+  fatherName   String
+  nationalCode String
+  zipCode      String?
+  phoneNumber  String
+  birthDate    DateTime
+  address      Address?
+
+  departmentManager      DepartmentManager?
+  departmentGroupManager DepartmentGroupManager?
+  teacher                Teacher?
+  student                Student?
+}
+
+model Address {
+  id       String @id @default(uuid())
+  province String
+  city     String
+  route    String
+  userId   String @unique
+  user     User   @relation(fields: [userId], references: [id])
+}
+
+model DepartmentGroupManager {
+  id                String          @id @default(uuid())
+  userId            String          @unique
+  user              User            @relation(fields: [userId], references: [id])
+  departmentGroupId String          @unique
+  departmentGroup   DepartmentGroup @relation(fields: [departmentGroupId], references: [id])
+}
+
+model DepartmentManager {
+  id           String     @id @default(uuid())
+  userId       String     @unique
+  user         User       @relation(fields: [userId], references: [id])
+  departmentId String     @unique
+  department   Department @relation(fields: [departmentId], references: [id])
+}
+
+model Teacher {
+  id               String            @id @default(uuid())
+  userId           String            @unique
+  user             User              @relation(fields: [userId], references: [id])
+  courses          Course[]
+  departmentGroups DepartmentGroup[]
+}
+
+model Student {
+  id                  String          @id @default(uuid())
+  userId              String          @unique
+  user                User            @relation(fields: [userId], references: [id])
+  studyMode           StudyMode
+  enteranceSemesterId String
+  enteranceSemester   Semester        @relation(fields: [enteranceSemesterId], references: [id])
+  studentCourses      StudentCourse[]
+}
+
+model Lesson {
+  id                String          @id @default(uuid())
+  title             String
+  coefficient       Int
+  lessonType        LessonType
+  departmentGroupId String
+  departmentGroup   DepartmentGroup @relation(fields: [departmentGroupId], references: [id])
+  courses           Course[]
+}
+
+model Course {
+  id             String          @id @default(uuid())
+  number         Int
+  capacity       Int             @default(25)
+  examAt         DateTime?
+  canceled       Boolean         @default(false)
+  lessonId       String
+  lesson         Lesson          @relation(fields: [lessonId], references: [id])
+  times          CourseTime[]
+  teacherId      String
+  teacher        Teacher         @relation(fields: [teacherId], references: [id])
+  classRoomId    String
+  classRoom      ClassRoom       @relation(fields: [classRoomId], references: [id])
+  semesterId     String
+  semester       Semester        @relation(fields: [semesterId], references: [id])
+  courseStudents StudentCourse[]
+
+  @@unique([number, classRoomId, lessonId, semesterId, teacherId])
+}
+
+model Semester {
+  id                       String    @id @default(uuid())
+  year                     Int
+  isFirstSemester          Boolean
+  courses                  Course[]
+  temproryScoringDeadLine  DateTime
+  permemantScoringDeadLine DateTime
+  newlyEnteredStudents     Student[]
+}
+
+model CourseTime {
+  id       String    @id @default(uuid())
+  day      Day
+  time     TimeRange
+  courseId String
+  course   Course    @relation(fields: [courseId], references: [id])
+}
+
+model ClassRoom {
+  id           String     @id @default(uuid())
+  number       Int
+  courses      Course[]
+  departmentId String
+  department   Department @relation(fields: [departmentId], references: [id])
+}
+
+model Department {
+  id         String             @id @default(uuid())
+  title      String
+  manager    DepartmentManager?
+  groups     DepartmentGroup[]
+  classRooms ClassRoom[]
+}
+
+model DepartmentGroup {
+  id           String                  @id @default(uuid())
+  title        String
+  departmentId String
+  department   Department              @relation(fields: [departmentId], references: [id])
+  lessons      Lesson[]
+  manager      DepartmentGroupManager?
+  teachers     Teacher[]
+}
+
+model StudentCourse {
+  id        String              @id @default(uuid())
+  studentId String
+  student   Student             @relation(fields: [studentId], references: [id])
+  courseId  String
+  course    Course              @relation(fields: [courseId], references: [id])
+  score     Float?
+  status    StudentCourseStatus @default(NOT_FINISHED)
+}
