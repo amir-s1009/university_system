@@ -150,9 +150,21 @@ model Semester {
   year                     Int
   isFirstSemester          Boolean
   courses                  Course[]
+  newlyEnteredStudents     Student[]
+  calander SemesterCalander?
+}
+
+model SemesterCalander {
+  semesterId String @id
+  semester Semester @relation(fields: [semesterId], references: [id])
+  takeCourseStartsAt DateTime
+  takeCourseEndsAt DateTime
+  addRemoveCourseStartsAt DateTime
+  addRemoveCourseEndsAt DateTime
+  removeCourseRequestStartsAt DateTime
+  removeCourseRequestEndsAt DateTime
   temproryScoringDeadLine  DateTime
   permemantScoringDeadLine DateTime
-  newlyEnteredStudents     Student[]
 }
 
 model CourseTime {
