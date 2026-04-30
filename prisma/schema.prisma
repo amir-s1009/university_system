@@ -113,6 +113,8 @@ model Student {
   enteranceSemesterId String
   enteranceSemester   Semester        @relation(fields: [enteranceSemesterId], references: [id])
   studentCourses      StudentCourse[]
+  departmentGroupId String
+  departmentGroup DepartmentGroup @relation(fields: [departmentGroupId], references: [id])
 }
 
 model Lesson {
@@ -136,13 +138,11 @@ model Course {
   times          CourseTime[]
   teacherId      String
   teacher        Teacher         @relation(fields: [teacherId], references: [id])
-  classRoomId    String
-  classRoom      ClassRoom       @relation(fields: [classRoomId], references: [id])
   semesterId     String
   semester       Semester        @relation(fields: [semesterId], references: [id])
   courseStudents StudentCourse[]
 
-  @@unique([number, classRoomId, lessonId, semesterId, teacherId])
+  @@unique([number, lessonId, semesterId, teacherId])
 }
 
 model Semester {
@@ -173,12 +173,14 @@ model CourseTime {
   time     TimeRange
   courseId String
   course   Course    @relation(fields: [courseId], references: [id])
+  classRoomId    String
+  classRoom      ClassRoom       @relation(fields: [classRoomId], references: [id])
 }
 
 model ClassRoom {
   id           String     @id @default(uuid())
   number       Int
-  courses      Course[]
+  courseTimes      CourseTime[]
   departmentId String
   department   Department @relation(fields: [departmentId], references: [id])
 }
@@ -199,6 +201,7 @@ model DepartmentGroup {
   lessons      Lesson[]
   manager      DepartmentGroupManager?
   teachers     Teacher[]
+  students Student[]
 }
 
 model StudentCourse {

@@ -5,4 +5,5 @@ export type StudentEntity = {
   userId: string;
   enteranceSemesterId: string;
   studyMode: StudyMode;
+  departmentGroupId: string;
 };

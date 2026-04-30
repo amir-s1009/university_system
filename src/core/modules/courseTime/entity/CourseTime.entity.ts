@@ -5,4 +5,5 @@ export type CourseTimeEntity = {
   day: Day;
   time: TimeRange;
   courseId: string;
+  classRoomId:string;
 };

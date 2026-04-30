@@ -6,6 +6,5 @@ export type CourseEntity = {
   canceled: boolean;
   lessonId: string;
   teacherId: string;
-  classRoomId: string;
   semesterId: string;
 };
