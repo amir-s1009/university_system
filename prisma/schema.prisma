@@ -13,6 +13,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  DEPARTMENT_MANAGER
+  DEPARTMENT_GROUP_MANAGER
+  TEACHER
+  STUDENT
+}
+
 enum Day {
   SATURDAY
   SUNDAY
@@ -64,6 +71,7 @@ model User {
   zipCode      String?
   phoneNumber  String
   birthDate    DateTime
+  role         Role
   address      Address?
 
   departmentManager      DepartmentManager?

@@ -1,4 +1,4 @@
-import { ROLE } from "@prisma/client";
+import { Role } from "@prisma/client";
 import { NextFunction, Request, Response } from "express";
 import z from "zod";
 
@@ -23,7 +23,7 @@ export type TControllerProps = {
 
 export type TJWT = {
   id: string;
-  role: ROLE;
+  role: Role;
 };
 
 export type TPagination = {

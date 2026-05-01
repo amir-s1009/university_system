@@ -1,3 +1,5 @@
+import { Role } from "@prisma/client";
+
 export type UserEntity = {
   id: string;
   firstName: string;
@@ -7,4 +9,5 @@ export type UserEntity = {
   zipCode?: string | null;
   phoneNumber: string;
   birthDate: Date;
+  role: Role;
 };
