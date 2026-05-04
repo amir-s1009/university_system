@@ -1,4 +1,4 @@
-import { StudyMode } from "@prisma/client";
+import { StudentStatus, StudyMode } from "@prisma/client";
 
 export type StudentEntity = {
   id: string;
@@ -6,4 +6,5 @@ export type StudentEntity = {
   enteranceSemesterId: string;
   studyMode: StudyMode;
   departmentGroupId: string;
+  status:StudentStatus
 };

@@ -57,6 +57,13 @@ enum LessonType {
   PRACTICAL
 }
 
+enum StudentStatus {
+  REGULAR
+  CONDITIONED
+  SUSPENDED
+  EXPULSED
+}
+
 model GeneralSettings {
   id               Int    @id @default(1)
   activeSemesterId String
@@ -118,11 +125,12 @@ model Student {
   userId              String          @unique
   user                User            @relation(fields: [userId], references: [id])
   studyMode           StudyMode
+  status              StudentStatus   @default(REGULAR)
   enteranceSemesterId String
   enteranceSemester   Semester        @relation(fields: [enteranceSemesterId], references: [id])
   studentCourses      StudentCourse[]
-  departmentGroupId String
-  departmentGroup DepartmentGroup @relation(fields: [departmentGroupId], references: [id])
+  departmentGroupId   String
+  departmentGroup     DepartmentGroup @relation(fields: [departmentGroupId], references: [id])
 }
 
 model Lesson {
@@ -133,6 +141,8 @@ model Lesson {
   departmentGroupId String
   departmentGroup   DepartmentGroup @relation(fields: [departmentGroupId], references: [id])
   courses           Course[]
+  prerequisites     Lesson[]        @relation(name: "prerequisites")
+  requiredFor       Lesson[]        @relation(name: "prerequisites")
 }
 
 model Course {
@@ -154,43 +164,43 @@ model Course {
 }
 
 model Semester {
-  id                       String    @id @default(uuid())
-  year                     Int
-  isFirstSemester          Boolean
-  courses                  Course[]
-  newlyEnteredStudents     Student[]
-  calander SemesterCalander?
+  id                   String            @id @default(uuid())
+  year                 Int
+  isFirstSemester      Boolean
+  courses              Course[]
+  newlyEnteredStudents Student[]
+  calander             SemesterCalander?
 }
 
 model SemesterCalander {
-  semesterId String @id
-  semester Semester @relation(fields: [semesterId], references: [id])
-  takeCourseStartsAt DateTime
-  takeCourseEndsAt DateTime
-  addRemoveCourseStartsAt DateTime
-  addRemoveCourseEndsAt DateTime
+  semesterId                  String   @id
+  semester                    Semester @relation(fields: [semesterId], references: [id])
+  takeCourseStartsAt          DateTime
+  takeCourseEndsAt            DateTime
+  addRemoveCourseStartsAt     DateTime
+  addRemoveCourseEndsAt       DateTime
   removeCourseRequestStartsAt DateTime
-  removeCourseRequestEndsAt DateTime
-  temproryScoringDeadLine  DateTime
-  permemantScoringDeadLine DateTime
+  removeCourseRequestEndsAt   DateTime
+  temproryScoringDeadLine     DateTime
+  permemantScoringDeadLine    DateTime
 }
 
 model CourseTime {
-  id       String    @id @default(uuid())
-  day      Day
-  time     TimeRange
-  courseId String
-  course   Course    @relation(fields: [courseId], references: [id])
-  classRoomId    String
-  classRoom      ClassRoom       @relation(fields: [classRoomId], references: [id])
+  id          String    @id @default(uuid())
+  day         Day
+  time        TimeRange
+  courseId    String
+  course      Course    @relation(fields: [courseId], references: [id])
+  classRoomId String
+  classRoom   ClassRoom @relation(fields: [classRoomId], references: [id])
 }
 
 model ClassRoom {
-  id           String     @id @default(uuid())
+  id           String       @id @default(uuid())
   number       Int
-  courseTimes      CourseTime[]
+  courseTimes  CourseTime[]
   departmentId String
-  department   Department @relation(fields: [departmentId], references: [id])
+  department   Department   @relation(fields: [departmentId], references: [id])
 }
 
 model Department {
@@ -209,7 +219,7 @@ model DepartmentGroup {
   lessons      Lesson[]
   manager      DepartmentGroupManager?
   teachers     Teacher[]
-  students Student[]
+  students     Student[]
 }
 
 model StudentCourse {
@@ -220,4 +230,13 @@ model StudentCourse {
   course    Course              @relation(fields: [courseId], references: [id])
   score     Float?
   status    StudentCourseStatus @default(NOT_FINISHED)
+  appeals ScoreAppeal[]
+}
+
+model ScoreAppeal {
+  id String @id @default(uuid())
+  studentCourseId String
+  studentCourse StudentCourse @relation(fields: [studentCourseId], references: [id])
+  requestMessage String
+  responseMessage String?
 }

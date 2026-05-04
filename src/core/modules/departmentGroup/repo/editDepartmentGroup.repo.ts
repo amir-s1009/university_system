@@ -3,5 +3,5 @@ import { DepartmentGroupEntity } from "../entity/DepartmentGroup.entity.js";
 export type EditDepartmentGroupRepo = ({
   data,
 }: {
-  data: DepartmentGroupEntity;
+  data: Partial<DepartmentGroupEntity>;
 }) => Promise<DepartmentGroupEntity>;
