@@ -3,7 +3,7 @@ import { jwtVerify } from "jose";
 import { Request, Response, NextFunction } from "express";
 import { response } from "../utils/response.js";
 import { TJWT } from "../core/types.js";
-import { ROLE } from "@prisma/client";
+import { Role } from "@prisma/client";
 
 const hackerMessages = [
   "ای بابا انگار شما کاربری نیستین که ادعا میکنین :(",
@@ -15,7 +15,7 @@ const hackerMessages = [
   "هه، تلاش جالب بود، ولی اینجا جا نداره 😜",
 ];
 
-export function roleWatch(rolesAllowed: ROLE[]) {
+export function roleWatch(rolesAllowed: Role[]) {
   return async (
     req: Request & { userId?: string },
     res: Response,

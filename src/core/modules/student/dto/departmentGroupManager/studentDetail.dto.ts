@@ -8,9 +8,6 @@ export type StudentDetailDTO = {
     year: number;
     isFirstSemester: boolean;
   };
-  department: {
-    title: string;
-  };
   user: {
     firstName: string;
     lastName: string;

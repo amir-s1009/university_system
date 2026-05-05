@@ -1,7 +1,11 @@
+import { TxClient } from "../../../../infrastructure/prisma.js";
 import { ClassRoomEntity } from "../entity/ClassRoom.entity.js";
 
-export type GetClassRoomByIdRepo = ({
-  id,
-}: {
-  id: string;
-}) => Promise<ClassRoomEntity | null>;
+export type GetClassRoomByIdRepo = (
+  {
+    id,
+  }: {
+    id: string;
+  },
+  tx?: TxClient
+) => Promise<ClassRoomEntity | null>;

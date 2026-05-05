@@ -4,9 +4,6 @@ export type StudentListItemDTO = {
   id: string;
   status: StudentStatus;
   studyMode: StudyMode;
-  department: {
-    title: string;
-  };
   user: {
     firstName: string;
     lastName: string;

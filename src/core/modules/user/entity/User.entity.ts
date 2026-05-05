@@ -10,4 +10,5 @@ export type UserEntity = {
   phoneNumber: string;
   birthDate: Date;
   role: Role;
+  password: string;
 };

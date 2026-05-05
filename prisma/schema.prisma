@@ -79,6 +79,7 @@ model User {
   phoneNumber  String
   birthDate    DateTime
   role         Role
+  password     String
   address      Address?
 
   departmentManager      DepartmentManager?
@@ -230,13 +231,13 @@ model StudentCourse {
   course    Course              @relation(fields: [courseId], references: [id])
   score     Float?
   status    StudentCourseStatus @default(NOT_FINISHED)
-  appeals ScoreAppeal[]
+  appeals   ScoreAppeal[]
 }
 
 model ScoreAppeal {
-  id String @id @default(uuid())
+  id              String        @id @default(uuid())
   studentCourseId String
-  studentCourse StudentCourse @relation(fields: [studentCourseId], references: [id])
-  requestMessage String
+  studentCourse   StudentCourse @relation(fields: [studentCourseId], references: [id])
+  requestMessage  String
   responseMessage String?
 }

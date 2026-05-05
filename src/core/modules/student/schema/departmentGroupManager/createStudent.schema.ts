@@ -1,3 +1,4 @@
+import { StudyMode } from "@prisma/client";
 import z from "zod";
 
 export const CreateStudentSchema = z.object({
@@ -29,9 +30,7 @@ export const CreateStudentSchema = z.object({
         })
         .optional(),
     }),
-    departmentGroups: z.object({
-      departmentGroupId: z.uuid("شناسه گروه آموزشی ارسال نشده است"),
-    }),
+    studyMode: z.enum(StudyMode, "مد تحصیلی دانشجو ارسال نشده است"),
   }),
 });
 

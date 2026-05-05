@@ -21,6 +21,6 @@ export type TeacherDetailDTO = {
         firstName: string;
         lastName: string;
       };
-    };
+    } | null;
   }[];
 };

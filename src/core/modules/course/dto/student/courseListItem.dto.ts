@@ -5,6 +5,7 @@ export type CourseListItemDTO = {
   number: number;
   canceled: boolean;
   examAt: Date | null;
+  remaining:number;
   lesson: {
     id: string;
     title: string;

@@ -6,12 +6,13 @@ export const EditCourseSchema = z.object({
     number: z
       .number("شماره دوره ارسال نشده است")
       .min(0, "شماره کلاس نمیتواند منفی باشد"),
-    capacity: z.number().min(0, "ظرفیت کلاس نمیتواند منفی باشد").optional(),
+    capacity: z
+      .number("ظرفیت دوره ارسال نشده است")
+      .min(0, "ظرفیت کلاس نمیتواند منفی باشد"),
     examAt: z.date().optional(),
-    lessonId: z.uuid("شناسه درس ارسال نشده است"),
-    teacherId: z.uuid("شناسه استاد ارسال نشده است"),
     times: z.array(
       z.object({
+        id: z.uuid("شناسه تایم دوره نامعتبر است").optional(),
         day: z.enum(Day, "روز کلاس غیر مجاز است"),
         time: z.enum(TimeRange, "بازه زمانی کلاس غیر مجاز است"),
         classRoomId: z.uuid("شناسه کلاس ارسال نشده است"),

@@ -7,7 +7,6 @@ export const CreateLessonSchema = z.object({
     coefficient: z
       .number("ضریب درس ارسال نشده است")
       .min(1, "ضریب درس نمیتواند کمتر از 1 باشد"),
-    departmentGroupId: z.uuid("شناسه گروه آموزشی ارسال نشده است"),
     lessonType: z.enum(LessonType, "نوع درس غیر مجاز است"),
   }),
 });

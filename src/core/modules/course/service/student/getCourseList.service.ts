@@ -5,10 +5,8 @@ import { GetCourseListSchema } from "../../schema/student/getCourseList.schema.j
 
 export type GetCourseListService = ({
   data,
-  userId,
   getCourseListRepo,
 }: {
   data: GetCourseListSchema;
-  userId: string;
   getCourseListRepo: GetCourseListRepo;
 }) => Response<CourseListItemDTO[]>;
