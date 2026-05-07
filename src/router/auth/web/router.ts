@@ -8,7 +8,7 @@ import {
   getUserInfoController,
 } from "../../../controller/user/web/user.js";
 import { editUserInfoSchema } from "../../../core/modules/auth/schema/web/editUserInfo.schema.js";
-import { loginSchema } from "../../../core/modules/auth/schema/web/login.schema.js";
+import { loginSchema } from "../../../core/modules/auth/schema/login.schema.js";
 import {
   loginController,
   refreshTokenController,
@@ -17,7 +17,7 @@ import {
 } from "../../../controller/auth/web/auth.js";
 import { signupSchema } from "../../../core/modules/auth/schema/web/signup.schema.js";
 import { verifySchema } from "../../../core/modules/auth/schema/web/verify.schema.js";
-import { refreshTokenSchema } from "../../../core/modules/auth/schema/web/refreshToken.schema.js";
+import { refreshTokenSchema } from "../../../core/modules/auth/schema/refreshToken.schema.js";
 
 const router = Router();
 

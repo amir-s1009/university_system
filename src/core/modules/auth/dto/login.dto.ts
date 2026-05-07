@@ -1,4 +1,4 @@
-export type SignupEntity = {
+export type LoginDTO = {
   accessToken: string;
   refreshToken: string;
 };

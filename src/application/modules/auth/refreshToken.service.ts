@@ -1,5 +1,5 @@
-import { RefreshTokenService } from "../../../../core/modules/auth/service/cms/refreshToken.service.js";
-import { AppError } from "../../../error.js";
+import { RefreshTokenService } from "../../../core/modules/auth/service/refreshToken.service.js";
+import { AppError } from "../../error.js";
 
 export const refreshTokenService: RefreshTokenService = async ({
   refreshToken,

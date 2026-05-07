@@ -2,8 +2,8 @@ import { loginService } from "../../../application/modules/auth/web/login.servic
 import { refreshTokenService } from "../../../application/modules/auth/web/refreshToken.service.js";
 import { signupService } from "../../../application/modules/auth/web/signup.service.js";
 import { verifyEmailService } from "../../../application/modules/auth/web/verifyEmail.service.js";
-import { loginSchema } from "../../../core/modules/auth/schema/web/login.schema.js";
-import { refreshTokenSchema } from "../../../core/modules/auth/schema/web/refreshToken.schema.js";
+import { loginSchema } from "../../../core/modules/auth/schema/login.schema.js";
+import { refreshTokenSchema } from "../../../core/modules/auth/schema/refreshToken.schema.js";
 import { signupSchema } from "../../../core/modules/auth/schema/web/signup.schema.js";
 import { verifySchema } from "../../../core/modules/auth/schema/web/verify.schema.js";
 import { buildJWTPayload } from "../../../core/modules/auth/utils/impl/buildJWTPayload.js";

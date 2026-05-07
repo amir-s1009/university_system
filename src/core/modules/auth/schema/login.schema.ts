@@ -2,7 +2,10 @@ import z from "zod";
 
 export const loginSchema = z.object({
   body: z.object({
-    phoneNumber: z.string().regex(/^09\d{9}$/, "شماره موبایل غیر مجاز است."),
+    nationalCode: z.number("کد ملی ارسال نشده است").refine((v) => {
+      if (String(v).length !== 10) return false;
+      return true;
+    }, "کد ملی باید 10 رقمی باشد"),
     password: z.string("رمز عبور ارسال نشده است"),
   }),
 });

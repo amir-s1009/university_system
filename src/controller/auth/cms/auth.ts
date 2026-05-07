@@ -1,5 +1,5 @@
-import { loginService } from "../../../application/modules/auth/cms/login.service.js";
-import { refreshTokenService } from "../../../application/modules/auth/cms/refreshToken.service.js";
+import { loginService } from "../../../application/modules/auth/login.service.js";
+import { refreshTokenService } from "../../../application/modules/auth/refreshToken.service.js";
 import { loginSchema } from "../../../core/modules/auth/schema/cms/login.schema.js";
 import { refreshTokenSchema } from "../../../core/modules/auth/schema/cms/refreshToken.schema.js";
 import { buildJWTPayload } from "../../../core/modules/auth/utils/impl/buildJWTPayload.js";
