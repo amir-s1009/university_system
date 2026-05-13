@@ -1,41 +1,48 @@
-import {Router, Request, Response, NextFunction} from "express";
+import { Router, Request, Response, NextFunction } from "express";
 import { roleWatch } from "../../../middlewares/index.js";
-
 
 const router = Router();
 
-router.put(
-  "/changeStudentStatus",
-  roleWatch(["DEPARTMENT_GROUP_MANAGER"]),
-  async(req: Request, res: Response, next: NextFunction) => {}
-);
-
-
-router.get(
-  "/createStudent",
-  roleWatch(["DEPARTMENT_GROUP_MANAGER"]),
-  async(req: Request, res: Response, next: NextFunction) => {}
-);
-
 
 router.put(
-  "/editStudent",
+  "/cancelCourse",
+  roleWatch(["DEPARTMENT_GROUP_MANAGER"]),
+  async(req: Request, res: Response, next: NextFunction) => {}
+);
+
+
+router.post(
+  "/createCourse",
+  roleWatch(["DEPARTMENT_GROUP_MANAGER"]),
+  async(req: Request, res: Response, next: NextFunction) => {}
+);
+
+
+router.delete(
+  "/deleteCourse",
+  roleWatch(["DEPARTMENT_GROUP_MANAGER"]),
+  async(req: Request, res: Response, next: NextFunction) => {}
+);
+
+
+router.put(
+  "/editCourse",
   roleWatch(["DEPARTMENT_GROUP_MANAGER"]),
   async(req: Request, res: Response, next: NextFunction) => {}
 );
 
 
 router.get(
-  "/getStudentDetail",
+  "/getCourseDetail",
   roleWatch(["DEPARTMENT_GROUP_MANAGER"]),
   async(req: Request, res: Response, next: NextFunction) => {}
 );
-
 
 router.get(
-  "/getStudentList",
+  "/getCourseList",
   roleWatch(["DEPARTMENT_GROUP_MANAGER"]),
   async(req: Request, res: Response, next: NextFunction) => {}
 );
+
 
 export default router;
