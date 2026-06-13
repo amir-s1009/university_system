@@ -1,5 +1,10 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { roleWatch } from "../../../middlewares/index.js";
+import { validator } from "../../../middlewares/validator.js";
+import { EditDepartmentGroupSchema } from "../../../core/modules/departmentGroup/schema/departmentManager/editDepartmentGroup.schema.js";
+import { ValidationList } from "../../../core/enums.js";
+import { CreateDepartmentGroupSchema } from "../../../core/modules/departmentGroup/schema/departmentManager/createDepartmentGroup.schema.js";
+import { ChangeDepartmentGroupManagerSchema } from "../../../core/modules/departmentGroup/schema/departmentManager/changeDepartmentGroupManager.schema.js";
 
 const router = Router();
 
@@ -18,18 +23,24 @@ router.get(
 router.put(
   "/editDepartmentGroup/:id",
   roleWatch(["DEPARTMENT_MANAGER"]),
+  validator(EditDepartmentGroupSchema, [
+    ValidationList.PARAMS,
+    ValidationList.BODY,
+  ]),
   async (req: Request, res: Response, next: NextFunction) => {}
 );
 
 router.post(
   "/createDepartmentGroup",
   roleWatch(["DEPARTMENT_MANAGER"]),
+  validator(CreateDepartmentGroupSchema, [ValidationList.BODY]),
   async (req: Request, res: Response, next: NextFunction) => {}
 );
 
 router.put(
   "/changeDepartmentGroupManager",
   roleWatch(["DEPARTMENT_MANAGER"]),
+  validator(ChangeDepartmentGroupManagerSchema, [ValidationList.BODY]),
   async (req: Request, res: Response, next: NextFunction) => {}
 );
 

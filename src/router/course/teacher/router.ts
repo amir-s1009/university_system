@@ -6,8 +6,7 @@ const router = Router();
 router.get(
   "/getCourseList",
   roleWatch(["TEACHER"]),
-  async(req: Request, res: Response, next: NextFunction) => {}
+  async (req: Request, res: Response, next: NextFunction) => {}
 );
-
 
 export default router;

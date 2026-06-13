@@ -1,41 +1,44 @@
-import {Router, Request, Response, NextFunction} from "express";
+import { Router, Request, Response, NextFunction } from "express";
 import { roleWatch } from "../../../middlewares/index.js";
-
+import { validator } from "../../../middlewares/validator.js";
+import { ChangeStudentStatusSchema } from "../../../core/modules/student/schema/departmentGroupManager/changeStudentStatus.schema.js";
+import { ValidationList } from "../../../core/enums.js";
+import { CreateStudentSchema } from "../../../core/modules/student/schema/departmentGroupManager/createStudent.schema.js";
+import { EditStudentSchema } from "../../../core/modules/student/schema/departmentGroupManager/editStudent.schema.js";
 
 const router = Router();
 
 router.put(
   "/changeStudentStatus",
   roleWatch(["DEPARTMENT_GROUP_MANAGER"]),
-  async(req: Request, res: Response, next: NextFunction) => {}
+  validator(ChangeStudentStatusSchema, [ValidationList.BODY]),
+  async (req: Request, res: Response, next: NextFunction) => {}
 );
-
 
 router.get(
   "/createStudent",
   roleWatch(["DEPARTMENT_GROUP_MANAGER"]),
-  async(req: Request, res: Response, next: NextFunction) => {}
+  validator(CreateStudentSchema, [ValidationList.BODY]),
+  async (req: Request, res: Response, next: NextFunction) => {}
 );
-
 
 router.put(
-  "/editStudent",
+  "/editStudent/:id",
   roleWatch(["DEPARTMENT_GROUP_MANAGER"]),
-  async(req: Request, res: Response, next: NextFunction) => {}
+  validator(EditStudentSchema, [ValidationList.PARAMS, ValidationList.BODY]),
+  async (req: Request, res: Response, next: NextFunction) => {}
 );
-
 
 router.get(
-  "/getStudentDetail",
+  "/getStudentDetail/:id",
   roleWatch(["DEPARTMENT_GROUP_MANAGER"]),
-  async(req: Request, res: Response, next: NextFunction) => {}
+  async (req: Request, res: Response, next: NextFunction) => {}
 );
-
 
 router.get(
   "/getStudentList",
   roleWatch(["DEPARTMENT_GROUP_MANAGER"]),
-  async(req: Request, res: Response, next: NextFunction) => {}
+  async (req: Request, res: Response, next: NextFunction) => {}
 );
 
 export default router;
