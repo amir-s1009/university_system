@@ -27,7 +27,7 @@ export const createClassRoomController = async ({ req, res, next}: TControllerPr
 };
 
 
-export const deletClassRoomController = async ({ req, res, next }: TControllerProps) => {
+export const deleteClassRoomController = async ({ req, res, next }: TControllerProps) => {
   try{
     const result = await deleteClassRoomService({
       id: req.params.id,

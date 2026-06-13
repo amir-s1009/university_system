@@ -11,7 +11,7 @@ import { editLessonRepo } from "../../../infrastructure/modules/lesson/editLesso
 import { getLessonByIdRepo } from "../../../infrastructure/modules/lesson/getLessonById.repo.js";
 import { response } from "../../../utils/response.js";
 
-export const creatLessonController = async ({req, res, next}: TControllerProps) => {
+export const createLessonController = async ({req, res, next}: TControllerProps) => {
   try{
     const result = await createLessonService({
       data: {

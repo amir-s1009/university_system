@@ -32,7 +32,7 @@ export const createDepartmentGroupController = async ({ req , res, next}: TContr
   }
 };
 
-export const editDepartmentGroup = async ({ req, res, next }: TControllerProps) => {
+export const editDepartmentGroupController = async ({ req, res, next }: TControllerProps) => {
   try{
     const result = await editDepartmentGroupService({
       data: {
