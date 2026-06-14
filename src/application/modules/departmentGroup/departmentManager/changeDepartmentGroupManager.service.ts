@@ -41,6 +41,7 @@ export const changeDepartmentGroupManagerService: ChangeDepartmentGroupManagerSe
     });
 
     return {
+      ok: true,
       code: 200,
       message: "مدیر گروه مورد نظر تغییر یافت",
     };

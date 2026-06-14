@@ -1,6 +1,8 @@
 import { Role } from "@prisma/client";
 import { CreateStudentService } from "../../../../core/modules/student/service/departmentGroupManager/createStudent.service.js";
 import { AppError } from "../../../error.js";
+import { hash } from "../../../../core/modules/auth/utils/impl/hash.js";
+import { SALT_ROUND } from "../../../../core/modules/auth/constant.js";
 
 export const createStudentService: CreateStudentService = async ({
   data,
@@ -35,6 +37,7 @@ export const createStudentService: CreateStudentService = async ({
             ? String(data.body.user.zipCode)
             : null,
           role: Role.STUDENT,
+          password: await hash({ raw: "1234567", salt: SALT_ROUND }),
         },
       },
       tx
@@ -67,6 +70,7 @@ export const createStudentService: CreateStudentService = async ({
   });
 
   return {
+    ok: true,
     code: 200,
     message: "دانشجوی مورد نظر ایجاد گردید",
   };

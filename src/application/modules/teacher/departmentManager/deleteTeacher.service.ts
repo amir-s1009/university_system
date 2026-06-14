@@ -33,6 +33,7 @@ export const deleteTeacherService: DeleteTeacherService = async ({
   });
 
   return {
+    ok: true,
     code: 200,
     message: "استاد مورد نظر حذف گردید",
   };

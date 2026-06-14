@@ -1,6 +1,8 @@
 import { Role } from "@prisma/client";
 import { CreateTeacherService } from "../../../../core/modules/teacher/service/departmentManager/createTeacher.service.js";
 import { AppError } from "../../../error.js";
+import { hash } from "../../../../core/modules/auth/utils/impl/hash.js";
+import { SALT_ROUND } from "../../../../core/modules/auth/constant.js";
 
 export const createTeacherService: CreateTeacherService = async ({
   data,
@@ -40,13 +42,14 @@ export const createTeacherService: CreateTeacherService = async ({
           firstName: data.body.user.firstName,
           lastName: data.body.user.lastName,
           fatherName: data.body.user.fatherName,
-          birthDate: data.body.user.birthData,
+          birthDate: new Date(data.body.user.birthDate),
           nationalCode: String(data.body.user.nationalCode),
           phoneNumber: String(data.body.user.phoneNumber),
           zipCode: data.body.user.zipCode
             ? String(data.body.user.zipCode)
             : null,
           role: Role.TEACHER,
+          password: await hash({ raw: "1234567", salt: SALT_ROUND }),
         },
       },
       tx
@@ -91,6 +94,7 @@ export const createTeacherService: CreateTeacherService = async ({
   });
 
   return {
+    ok: true,
     code: 200,
     message: "استاد با موفقیت ایجاد شد",
   };

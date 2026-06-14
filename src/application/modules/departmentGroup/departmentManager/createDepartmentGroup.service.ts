@@ -21,6 +21,7 @@ export const createDepartmentGroupService: CreateDepartmentGroupService =
     });
 
     return {
+      ok: true,
       code: 200,
       message: "گروه آموزشی ایجاد گردید",
     };

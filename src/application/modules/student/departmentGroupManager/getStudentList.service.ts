@@ -17,6 +17,7 @@ export const getStudentListService: GetStudentListService = async ({
   });
 
   return {
+    ok: true,
     code: 200,
     data: studentList,
   };

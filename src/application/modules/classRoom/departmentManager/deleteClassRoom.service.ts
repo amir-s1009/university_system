@@ -9,6 +9,7 @@ export const deleteClassRoomService: DeleteClassRoomService = async ({
   });
 
   return {
+    ok: true,
     code: 200,
     message: "کلاس مورد نظر حذف شد",
   };

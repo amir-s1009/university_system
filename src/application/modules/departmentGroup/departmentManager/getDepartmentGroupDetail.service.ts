@@ -9,6 +9,7 @@ export const getDepartmentGroupDetailService: GetDepartmentGroupDetailService =
     if (!departmentGroupDetail) throw new AppError("گروه آموزشی یافت نشد", 404);
 
     return {
+      ok: true,
       code: 200,
       data: departmentGroupDetail,
     };

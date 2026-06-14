@@ -36,6 +36,7 @@ export const editLessonService: EditLessonService = async ({
   });
 
   return {
+    ok: true,
     code: 200,
     message: "درس مورد نظر ایجاد گردید",
   };

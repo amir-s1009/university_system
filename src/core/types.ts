@@ -9,6 +9,7 @@ export type TMeta = {
 };
 
 export type TResponse<T> = {
+  ok:boolean;
   code: number;
   message?: string;
   data?: T;

@@ -14,6 +14,7 @@ export const createUserRepo: CreateUserRepo = async ({ data }, tx) => {
       phoneNumber: data.phoneNumber,
       role: data.role,
       zipCode: data.zipCode,
+      password: data.password,
     },
   });
 };

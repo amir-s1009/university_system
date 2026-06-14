@@ -36,6 +36,7 @@ export const cancelCourseService: CancelCourseService = async ({
   });
 
   return {
+    ok: true,
     code: 200,
     message: "دوره مورد نظر لغو گردید",
   };

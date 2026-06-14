@@ -13,6 +13,7 @@ export const getDepartmentGroupListService: GetDepartmentGroupListService =
     });
 
     return {
+      ok: true,
       code: 200,
       data: departmentGroupList,
     };

@@ -106,6 +106,7 @@ export const createStudentCourseService: CreateStudentCourseService = async ({
   });
 
   return {
+    ok: true,
     code: 200,
     message: "دوره مورد نظر به لیست انتخاب واحد نیمسال جاری شما اضافه گردید",
   };

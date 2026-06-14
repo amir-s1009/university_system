@@ -177,6 +177,7 @@ export const editTeacherService: EditTeacherService = async ({
   });
 
   return {
+    ok: true,
     code: 200,
     message: "استاد با موفقیت ایجاد شد",
   };

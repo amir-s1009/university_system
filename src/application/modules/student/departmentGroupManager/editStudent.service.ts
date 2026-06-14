@@ -107,6 +107,7 @@ export const editStudentService: EditStudentService = async ({
   });
 
   return {
+    ok: true,
     code: 200,
     message: "دانشجوی مورد نظر ایجاد گردید",
   };

@@ -47,6 +47,7 @@ export const changeStudentCourseStatusService: ChangeStudentCourseStatusService 
     });
 
     return {
+      ok: true,
       code: 200,
       message: "دوره دانشجو با موفقیت تغییر وضعیت یافت",
     };

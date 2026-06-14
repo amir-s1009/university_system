@@ -16,6 +16,7 @@ export const getClassRoomListService: GetClassRoomListService = async ({
   });
 
   return {
+    ok: true,
     code: 200,
     data: classRooms,
   };

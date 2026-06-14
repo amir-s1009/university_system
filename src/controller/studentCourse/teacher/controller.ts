@@ -1,7 +1,8 @@
-import { changeStudentCourseStatusService } from "../../../application/modules/studentCourse/teacher/changeStudentCourseStatus.service.js"
+import { changeStudentCourseStatusService } from "../../../application/modules/studentCourse/teacher/changeStudentCourseStatus.service.js";
 import { editScoreService } from "../../../application/modules/studentCourse/teacher/editScore.service.js";
 import { getStudentCourseDetailService } from "../../../application/modules/studentCourse/teacher/getStudentCourseDetail.service.js";
 import { getStudentCourseListService } from "../../../application/modules/studentCourse/teacher/getStudentCourseList.service.js";
+import { GetStudentCourseListSchema } from "../../../core/modules/studentCourse/schema/teacher/getStudentCourseList.schema.js";
 import { TControllerProps } from "../../../core/types.js";
 import { getCourseByIdRepo } from "../../../infrastructure/modules/course/getCourseById.repo.js";
 import { editStudentCourseRepo } from "../../../infrastructure/modules/studentCourse/editStudentCourse.repo.js";
@@ -11,80 +12,89 @@ import { getStudentCourseListRepo } from "../../../infrastructure/modules/studen
 import { getTeacherByUserIdRepo } from "../../../infrastructure/modules/teacher/getTeacherByUserId.repo.js";
 import { response } from "../../../utils/response.js";
 
-export const changeStudentCourseStatusController = async ({ req, res, next }: TControllerProps) => {
-  try{
+export const changeStudentCourseStatusController = async ({
+  req,
+  res,
+  next,
+}: TControllerProps) => {
+  try {
     const result = await changeStudentCourseStatusService({
-    data: {
-      body: req.body,
-    },
-    userId: req.userId!,
-    editStudentCourseRepo,
-    getCourseByIdRepo,
-    getStudentCourseByIdRepo,
-    getTeacherByUserIdRepo
+      data: {
+        body: req.body,
+      },
+      userId: req.userId!,
+      editStudentCourseRepo,
+      getCourseByIdRepo,
+      getStudentCourseByIdRepo,
+      getTeacherByUserIdRepo,
     });
-    
+
     return response(res, result);
   } catch (err) {
     return next(err);
   }
 };
 
-
-
-export const editScoreController = async ({ req, res, next }: TControllerProps) => {
-  try{
+export const editScoreController = async ({
+  req,
+  res,
+  next,
+}: TControllerProps) => {
+  try {
     const result = await editScoreService({
-    data: {
-      body: req.body,
-    },
-    userId: req.userId!,
-    editStudentCourseRepo,
-    getCourseByIdRepo,
-    getStudentCourseByIdRepo,
-    getTeacherByUserIdRepo,    
+      data: {
+        body: req.body,
+      },
+      userId: req.userId!,
+      editStudentCourseRepo,
+      getCourseByIdRepo,
+      getStudentCourseByIdRepo,
+      getTeacherByUserIdRepo,
     });
-    
+
     return response(res, result);
   } catch (err) {
     return next(err);
   }
 };
 
-
-
-export const getStudentCourseDetailController = async ({ req, res, next }: TControllerProps) => {
-  try{
+export const getStudentCourseDetailController = async ({
+  req,
+  res,
+  next,
+}: TControllerProps) => {
+  try {
     const result = await getStudentCourseDetailService({
-    id: req.params.id,
-    userId: req.userId!,
-    getTeacherByUserIdRepo,
-    getStudentCourseDetailRepo
+      id: req.params.id,
+      userId: req.userId!,
+      getTeacherByUserIdRepo,
+      getStudentCourseDetailRepo,
     });
-    
+
     return response(res, result);
   } catch (err) {
     return next(err);
   }
 };
 
-
-export const getStudentCourseListController = async ({ req, res, next }: TControllerProps) => {
-  try{
+export const getStudentCourseListController = async ({
+  req,
+  res,
+  next,
+}: TControllerProps) => {
+  const queries = req.query as GetStudentCourseListSchema["queries"];
+  try {
     const result = await getStudentCourseListService({
-    data: {
-      queries: req.query as { courseId: string }
-    },
-    userId: req.userId!,
-    getTeacherByUserIdRepo,
-    getStudentCourseListRepo
+      data: {
+        queries,
+      },
+      userId: req.userId!,
+      getTeacherByUserIdRepo,
+      getStudentCourseListRepo,
     });
-    
+
     return response(res, result);
   } catch (err) {
     return next(err);
   }
 };
-
-
-

@@ -28,6 +28,7 @@ export const loginService: LoginService = async ({
   const credentials = await signJwt(payload);
 
   return {
+    ok:true,
     code: 200,
     data: credentials,
   };

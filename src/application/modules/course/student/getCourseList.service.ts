@@ -11,6 +11,7 @@ export const getCourseListService: GetCourseListService = async ({
   });
 
   return {
+    ok: true,
     code: 200,
     data: courses,
   };

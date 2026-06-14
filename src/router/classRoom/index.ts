@@ -4,6 +4,6 @@ import departmentManagerRouter from "./departmentManager/router.js";
 
 const router = Router();
 
-router.use("/classRoom/departmentManager", departmentManagerRouter);
+router.use("/departmentManager", departmentManagerRouter);
 
 export default router;

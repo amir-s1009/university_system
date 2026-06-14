@@ -1,8 +1,9 @@
-import { createTeacherService } from "../../../application/modules/teacher/departmentManager/createTeacher.service.js"
+import { createTeacherService } from "../../../application/modules/teacher/departmentManager/createTeacher.service.js";
 import { deleteTeacherService } from "../../../application/modules/teacher/departmentManager/deleteTeacher.service.js";
 import { editTeacherService } from "../../../application/modules/teacher/departmentManager/editTeacher.service.js";
 import { getTeacherDetailService } from "../../../application/modules/teacher/departmentManager/getTeacherDetail.service.js";
 import { getTeacherListService } from "../../../application/modules/teacher/departmentManager/getTeacherList.service.js";
+import { EditTeacherSchema } from "../../../core/modules/teacher/schema/departmentManager/editTeacher.schema.js";
 import { TControllerProps } from "../../../core/types.js";
 import { createAddressRepo } from "../../../infrastructure/modules/address/createAddress.repo.js";
 import { deleteAddressRepo } from "../../../infrastructure/modules/address/deleteAddress.repo.js";
@@ -17,14 +18,20 @@ import { deleteTeacherRepo } from "../../../infrastructure/modules/teacher/delet
 import { getTeacherDetailRepo } from "../../../infrastructure/modules/teacher/departmentManager/getTeacherDetail.repo.js";
 import { getTeacherListRepo } from "../../../infrastructure/modules/teacher/departmentManager/getTeacherList.repo.js";
 import { editTeacherRepo } from "../../../infrastructure/modules/teacher/editTeacher.repo.js";
+import { getTeacherByIdRepo } from "../../../infrastructure/modules/teacher/getTeacherById.repo.js";
+import { getTeacherByUserIdRepo } from "../../../infrastructure/modules/teacher/getTeacherByUserId.repo.js";
 import { getTeacherDepartmentGroupListRepo } from "../../../infrastructure/modules/teacher/getTeacherDepartmentGroupList.repo.js";
 import { createUserRepo } from "../../../infrastructure/modules/user/createUser.repo.js";
 import { editUserRepo } from "../../../infrastructure/modules/user/editUser.repo.js";
 import { unitOfWorkRepo } from "../../../infrastructure/unitOfWork.repo.js";
 import { response } from "../../../utils/response.js";
 
-export const createTeacherController = async({ req, res, next }: TControllerProps) => {
-  try{
+export const createTeacherController = async ({
+  req,
+  res,
+  next,
+}: TControllerProps) => {
+  try {
     const result = await createTeacherService({
       data: {
         body: req.body,
@@ -44,16 +51,18 @@ export const createTeacherController = async({ req, res, next }: TControllerProp
   }
 };
 
-
-
-export const deleteTeacherController = async({ req, res, next }: TControllerProps) => {
-  try{
+export const deleteTeacherController = async ({
+  req,
+  res,
+  next,
+}: TControllerProps) => {
+  try {
     const result = await deleteTeacherService({
       id: req.params.id,
       userId: req.userId!,
       getDepartmentManagerByUserIdRepo,
       deleteTeacherRepo,
-      getTeacherDepartmentGroupListRepo
+      getTeacherDepartmentGroupListRepo,
     });
     return response(res, result);
   } catch (err) {
@@ -61,14 +70,17 @@ export const deleteTeacherController = async({ req, res, next }: TControllerProp
   }
 };
 
-
-
-export const editTeacherController = async({ req, res, next }: TControllerProps) => {
-  try{
+export const editTeacherController = async ({
+  req,
+  res,
+  next,
+}: TControllerProps) => {
+  const params = req.params as EditTeacherSchema["params"];
+  try {
     const result = await editTeacherService({
       data: {
         body: req.body,
-        params: req.params as { id: string }
+        params,
       },
       userId: req.userId!,
       getDepartmentManagerByUserIdRepo,
@@ -82,7 +94,7 @@ export const editTeacherController = async({ req, res, next }: TControllerProps)
       editUserRepo,
       getAddressByUserIdRepo,
       unitOfWorkRepo,
-      getTeacherByIdRepo
+      getTeacherByIdRepo: getTeacherByIdRepo,
     });
     return response(res, result);
   } catch (err) {
@@ -90,15 +102,16 @@ export const editTeacherController = async({ req, res, next }: TControllerProps)
   }
 };
 
-
-
-
-export const getTeacherDetailController = async({ req, res, next }: TControllerProps) => {
-  try{
+export const getTeacherDetailController = async ({
+  req,
+  res,
+  next,
+}: TControllerProps) => {
+  try {
     const result = await getTeacherDetailService({
       id: req.params.id,
       userId: req.userId!,
-      getTeacherDetailRepo
+      getTeacherDetailRepo,
     });
     return response(res, result);
   } catch (err) {
@@ -106,9 +119,12 @@ export const getTeacherDetailController = async({ req, res, next }: TControllerP
   }
 };
 
-
-export const getTeacherListController = async({ req, res, next }: TControllerProps) => {
-  try{
+export const getTeacherListController = async ({
+  req,
+  res,
+  next,
+}: TControllerProps) => {
+  try {
     const result = await getTeacherListService({
       userId: req.userId!,
       getDepartmentManagerByUserIdRepo,
@@ -119,4 +135,3 @@ export const getTeacherListController = async({ req, res, next }: TControllerPro
     return next(err);
   }
 };
-

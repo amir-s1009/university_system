@@ -16,6 +16,7 @@ export const refreshTokenService: RefreshTokenService = async ({
     await signJwt(payload);
 
   return {
+    ok:true,
     code: 200,
     data: {
       accessToken: newAccessToken,

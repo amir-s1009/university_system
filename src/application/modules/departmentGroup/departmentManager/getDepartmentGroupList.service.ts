@@ -16,5 +16,9 @@ export const getDepartmentGroupListService: GetDepartmentGroupListService =
       departmentId: departmentManager.departmentId,
     });
 
-    return { code: 200, data: departmentGroupList };
+    return {
+      ok: true,
+      code: 200,
+      data: departmentGroupList,
+    };
   };

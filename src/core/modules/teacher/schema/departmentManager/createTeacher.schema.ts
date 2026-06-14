@@ -7,20 +7,23 @@ export const CreateTeacherSchema = z.object({
       lastName: z.string("نام خانوادگی استاد ارسال نشده است"),
       fatherName: z.string("نام پدر استاد ارسال نشده است"),
       nationalCode: z
-        .number("کد ملی استاد ارسال نشده است")
+        .string("کد ملی استاد ارسال نشده است")
         .refine((v) => String(v).length === 10, "طول کد ملی غیر مجاز است"),
       zipCode: z
-        .number()
+        .string()
         .optional()
-        .refine((v) => (v ? String(v).length === 10 : true)),
+        .refine(
+          (v) => (v ? String(v).length === 10 : true),
+          "طول کد پستی باید 10 رقمی باشد."
+        ),
       phoneNumber: z
-        .number("شماره موبایل استاد ارسال نشده است")
-        .refine((v) => String(v).length === 10, "طول شماره موبایل غیر مجاز است")
+        .string("شماره موبایل استاد ارسال نشده است")
+        .refine((v) => String(v).length === 11, "طول شماره موبایل غیر مجاز است")
         .refine(
           (v) => String(v).slice(0, 2) === "09",
           "شماره موبایل باید با 09 آغاز شود"
         ),
-      birthData: z.date("تاریخ تولد استاد ارسال نشده است"),
+      birthDate: z.iso.date("تاریخ تولد استاد ارسال نشده است"),
       address: z
         .object({
           province: z.string("استان ارسال نشده است"),
@@ -29,13 +32,11 @@ export const CreateTeacherSchema = z.object({
         })
         .optional(),
     }),
-    departmentGroups: z
-      .array(
-        z.object({
-          departmentGroupId: z.uuid("شناسه گروه آموزشی ارسال نشده است"),
-        })
-      )
-      .optional(),
+    departmentGroups: z.array(
+      z.object({
+        departmentGroupId: z.uuid("شناسه گروه آموزشی ارسال نشده است"),
+      })
+    ),
   }),
 });
 

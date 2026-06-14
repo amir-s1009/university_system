@@ -35,6 +35,7 @@ export const editScoreService: EditScoreService = async ({
   });
 
   return {
+    ok: true,
     code: 200,
     message: "نمره با موفقیت ویرایش گردید",
   };

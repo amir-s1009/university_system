@@ -5,7 +5,7 @@ import teacherRouter from "./teacher/router.js";
 
 const router = Router();
 
-router.use("/departmentGroup/departmentManager", departmentManagerRouter);
-router.use("/departmentGroup/teacher", teacherRouter);
+router.use("/departmentManager", departmentManagerRouter);
+router.use("/teacher", teacherRouter);
 
 export default router;

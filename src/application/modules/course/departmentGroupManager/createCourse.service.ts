@@ -41,6 +41,7 @@ export const createCourseService: CreateCourseService = async ({
   });
 
   return {
+    ok: true,
     code: 200,
     message: "دوره مورد نظر ایجاد گردید",
   };

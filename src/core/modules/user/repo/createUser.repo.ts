@@ -15,6 +15,7 @@ export type CreateUserRepo = (
       | "role"
       | "zipCode"
       | "birthDate"
+      | "password"
     >;
   },
   tx?: TxClient

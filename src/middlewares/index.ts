@@ -24,6 +24,7 @@ export function roleWatch(rolesAllowed: Role[]) {
     const token = req.headers["authorization"]?.split(" ")[1];
     if (!token) {
       response(res, {
+        ok: false,
         code: 401,
         message: "برای تکمیل درخواست ابتدا باید وارد سایت شوید",
       });
@@ -36,6 +37,7 @@ export function roleWatch(rolesAllowed: Role[]) {
       if (!envKey) throw new Error();
     } catch {
       response(res, {
+        ok: false,
         code: 500,
         message: "خطای سرور رخ داده است، لطفا با پشتیبانی تماس بگیرید",
       });
@@ -52,6 +54,7 @@ export function roleWatch(rolesAllowed: Role[]) {
       }
       if (!rolesAllowed.includes(jwtPayload.role)) {
         response(res, {
+          ok: false,
           code: 403,
           message: "سطح کاربری شما مجوز دسترسی به این قسمت از سایت را ندارد",
         });
@@ -61,6 +64,7 @@ export function roleWatch(rolesAllowed: Role[]) {
       return next();
     } catch {
       response(res, {
+        ok: false,
         code: 401,
         message: "برای تکمیل درخواست ابتدا باید وارد سایت شوید",
       });

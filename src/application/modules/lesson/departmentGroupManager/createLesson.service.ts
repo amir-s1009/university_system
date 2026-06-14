@@ -23,6 +23,7 @@ export const createLessonService: CreateLessonService = async ({
   });
 
   return {
+    ok: true,
     code: 200,
     message: "درس مورد نظر ایجاد گردید",
   };

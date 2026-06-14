@@ -10,6 +10,7 @@ export function errorHandler(
 ) {
   if (err instanceof AppError) {
     response(res, {
+      ok: false,
       code: err.statusCode,
       message: err.message,
       data: err.data,
@@ -19,6 +20,7 @@ export function errorHandler(
 
   // ارور عمومی
   response(res, {
+    ok: false,
     code: 500,
     message: err.message || "خطای سرور رخ داده است",
   });

@@ -1,7 +1,7 @@
 import { GetStudentCourseListService } from "../../../../core/modules/studentCourse/service/student/getStudentCourseList.service.js";
 import { AppError } from "../../../error.js";
 
-export const getStudentCourseList: GetStudentCourseListService = async ({
+export const getStudentCourseListService: GetStudentCourseListService = async ({
   data,
   userId,
   getStudentCourseListRepo,
@@ -18,6 +18,7 @@ export const getStudentCourseList: GetStudentCourseListService = async ({
   });
 
   return {
+    ok: true,
     code: 200,
     data: studentCourseList,
   };

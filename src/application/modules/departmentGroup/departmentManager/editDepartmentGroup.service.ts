@@ -32,6 +32,7 @@ export const editDepartmentGroupService: EditDepartmentGroupService = async ({
   });
 
   return {
+    ok: true,
     code: 200,
     message: "گروه آموزشی ایجاد گردید",
   };

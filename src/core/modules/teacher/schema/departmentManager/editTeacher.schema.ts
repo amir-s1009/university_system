@@ -29,13 +29,11 @@ export const EditTeacherSchema = z.object({
         })
         .optional(),
     }),
-    departmentGroups: z
-      .array(
-        z.object({
-          departmentGroupId: z.uuid("شناسه گروه آموزشی ارسال نشده است"),
-        })
-      )
-      .optional(),
+    departmentGroups: z.array(
+      z.object({
+        departmentGroupId: z.uuid("شناسه گروه آموزشی ارسال نشده است"),
+      })
+    ),
   }),
 
   params: z.object({

@@ -30,6 +30,7 @@ export const deleteLessonService: DeleteLessonService = async ({
   });
 
   return {
+    ok: true,
     code: 200,
     message: "درس مورد نظر حذف گردید",
   };

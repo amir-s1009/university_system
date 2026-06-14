@@ -37,6 +37,7 @@ export function validator(schema: ZodObject, validationList: ValidationList[]) {
         const message =
           errors?.[0]?.message || "داده ارسال شده نا معتبر میباشد";
         response(res, {
+          ok:false,
           code: 400,
           message: message,
         });
@@ -45,6 +46,7 @@ export function validator(schema: ZodObject, validationList: ValidationList[]) {
       next();
     } catch {
       response(res, {
+        ok:false,
         code: 500,
         message: "خطای سرور رخ داده است",
       });

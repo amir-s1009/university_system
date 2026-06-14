@@ -12,6 +12,7 @@ export const getCourseDetailService: GetCourseDetailService = async ({
   if (!course) throw new AppError("دوره مورد نظر یافت نشد", 404);
 
   return {
+    ok: true,
     code: 200,
     data: course,
   };

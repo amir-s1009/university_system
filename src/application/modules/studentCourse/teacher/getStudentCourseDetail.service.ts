@@ -21,6 +21,7 @@ export const getStudentCourseDetailService: GetStudentCourseDetailService =
     if (!studentCourseDetail) throw new AppError("دوره دانشجو یافت نشد", 404);
 
     return {
+      ok: true,
       code: 200,
       data: studentCourseDetail,
     };

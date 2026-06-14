@@ -33,6 +33,7 @@ export const changeStudentStatusService: ChangeStudentStatusService = async ({
   });
 
   return {
+    ok: true,
     code: 200,
     message: "وضعیت دانشجو تغییر یافت",
   };

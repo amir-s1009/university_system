@@ -13,6 +13,7 @@ export const getTeacherDetailService: GetTeacherDetailService = async ({
   if (!teacherDetail) throw new AppError("استاد یافت نشد", 404);
 
   return {
+    ok: true,
     code: 200,
     data: teacherDetail,
   };

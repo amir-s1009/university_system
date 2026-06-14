@@ -11,6 +11,7 @@ export const getStudentDetailService: GetStudentDetailService = async ({
   if (!studentDetail) throw new AppError("دانشجوی مورد نظر یافت نشد", 404);
 
   return {
+    ok: true,
     code: 200,
     data: studentDetail,
   };

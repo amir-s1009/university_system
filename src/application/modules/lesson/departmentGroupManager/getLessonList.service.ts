@@ -17,6 +17,7 @@ export const getLessonListService: GetLessonListService = async ({
   });
 
   return {
+    ok: true,
     code: 200,
     data: lessonList,
   };

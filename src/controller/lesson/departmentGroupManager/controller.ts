@@ -1,18 +1,25 @@
-import { createLessonService } from "../../../application/modules/lesson/departmentGroupManager/createLesson.service.js"
+import { createLessonService } from "../../../application/modules/lesson/departmentGroupManager/createLesson.service.js";
 import { deleteLessonService } from "../../../application/modules/lesson/departmentGroupManager/deleteLesson.service.js";
 import { editLessonService } from "../../../application/modules/lesson/departmentGroupManager/editLesson.service.js";
 import { getLessonDetailService } from "../../../application/modules/lesson/departmentGroupManager/getLessonDetail.service.js";
 import { getLessonListService } from "../../../application/modules/lesson/departmentGroupManager/getLessonList.service.js";
+import { EditLessonSchema } from "../../../core/modules/lesson/schema/departmentGroupManager/editLesson.schema.js";
 import { TControllerProps } from "../../../core/types.js";
-import { getDepartmentGroupManagerByUserIdRepo } from "../../../infrastructure/modules/departmentGroupManager/getDepartmentGroupManagerByUserId.repo.js"
-import { createLessonRepo } from "../../../infrastructure/modules/lesson/createLesson.repo.js"
+import { getDepartmentGroupManagerByUserIdRepo } from "../../../infrastructure/modules/departmentGroupManager/getDepartmentGroupManagerByUserId.repo.js";
+import { createLessonRepo } from "../../../infrastructure/modules/lesson/createLesson.repo.js";
 import { deleteLessonRepo } from "../../../infrastructure/modules/lesson/deleteLesson.repo.js";
+import { getLessonDetailRepo } from "../../../infrastructure/modules/lesson/departmentGroupManager/getLessonDetail.repo.js";
+import { getLessonListRepo } from "../../../infrastructure/modules/lesson/departmentGroupManager/getLessonList.repo.js";
 import { editLessonRepo } from "../../../infrastructure/modules/lesson/editLesson.repo.js";
 import { getLessonByIdRepo } from "../../../infrastructure/modules/lesson/getLessonById.repo.js";
 import { response } from "../../../utils/response.js";
 
-export const createLessonController = async ({req, res, next}: TControllerProps) => {
-  try{
+export const createLessonController = async ({
+  req,
+  res,
+  next,
+}: TControllerProps) => {
+  try {
     const result = await createLessonService({
       data: {
         body: req.body,
@@ -28,15 +35,18 @@ export const createLessonController = async ({req, res, next}: TControllerProps)
   }
 };
 
-
-export const deleteLessonController = async ({req, res, next}: TControllerProps) => {
-  try{
+export const deleteLessonController = async ({
+  req,
+  res,
+  next,
+}: TControllerProps) => {
+  try {
     const result = await deleteLessonService({
       id: req.params.id,
       userId: req.userId!,
       deleteLessonRepo,
       getDepartmentGroupManagerByUserIdRepo,
-      getLessonByIdRepo
+      getLessonByIdRepo,
     });
 
     return response(res, result);
@@ -45,53 +55,61 @@ export const deleteLessonController = async ({req, res, next}: TControllerProps)
   }
 };
 
-
-export const editLessonController = async ({req, res, next}: TControllerProps) => {
-  try{
+export const editLessonController = async ({
+  req,
+  res,
+  next,
+}: TControllerProps) => {
+  const params = req.params as EditLessonSchema["params"];
+  try {
     const result = await editLessonService({
       data: {
         body: req.body,
-        params: req.params as { id: string }
+        params,
       },
       userId: req.userId!,
       editLessonRepo,
       getDepartmentGroupManagerByUserIdRepo,
-      getLessonByIdRepo
+      getLessonByIdRepo,
     });
 
     return response(res, result);
   } catch (err) {
     return next(err);
   }
-}
+};
 
-export const getLessonDetailController = async ({req, res, next}: TControllerProps) => {
-  try{
+export const getLessonDetailController = async ({
+  req,
+  res,
+  next,
+}: TControllerProps) => {
+  try {
     const result = await getLessonDetailService({
       id: req.params.id,
-      getLessonDetailRepo
+      getLessonDetailRepo: getLessonDetailRepo,
     });
 
     return response(res, result);
   } catch (err) {
     return next(err);
   }
-}
+};
 
-
-
-export const getLessonListController = async ({req, res, next}: TControllerProps) => {
-  try{
+export const getLessonListController = async ({
+  req,
+  res,
+  next,
+}: TControllerProps) => {
+  try {
     const result = await getLessonListService({
       userId: req.userId!,
       getDepartmentGroupManagerByUserIdRepo,
-      getLessonListRepo,
+      getLessonListRepo: getLessonListRepo,
     });
 
     return response(res, result);
   } catch (err) {
     return next(err);
   }
-}
-
-
+};

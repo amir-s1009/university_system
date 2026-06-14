@@ -11,6 +11,7 @@ export const getLessonDetailService: GetLessonDetailService = async ({
   if (!lessonDetail) throw new AppError("درس مورد نظر یافت نشد", 404);
 
   return {
+    ok: true,
     code: 200,
     data: lessonDetail,
   };

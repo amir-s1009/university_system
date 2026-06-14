@@ -9,6 +9,7 @@ export const getUserInfoService: GetUserInfoService = async ({
   if (!userInfo) throw new AppError("اطلاعات کاربری شما یافت نشد", 404);
 
   return {
+    ok:true,
     code: 200,
     data: userInfo,
   };
